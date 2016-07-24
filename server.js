@@ -1,20 +1,4 @@
 var http = require('http');
-var fs = require('fs');
-var module1 = require('./module1');
-var module2 = require('./module2');
+var app = require('./app');
 
-function onRequest(request, response) {
-    response.writeHead(200, {'Content-Type': 'text/html'});
-    fs.readFile('./index.html', null, function(error, data) {
-       if (error) {
-           response.writeHead(404);
-           response.write('File not found')
-       }
-       else {
-           response.write(data);
-       }
-       response.end();
-    });
-}
-
-http.createServer(onRequest).listen(8000);
+http.createServer(app.handleRequest).listen(8000);
